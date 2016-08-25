@@ -1,0 +1,14 @@
+services:
+    mq_producer.split_file:
+        class: AppBundle\MQ\Producer\SplitFile
+        arguments:
+            - %file_csv_path%
+            - @old_sound_rabbit_mq.split_file_producer
+
+    mq_consumer.process_node:
+            class: AppBundle\MQ\Consumer\ReadNode
+            arguments:
+                - @logger
+                - %mage_url%
+                - %mage_user%
+                - %mage_api_key%
